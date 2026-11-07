@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "title": "历史影像",
+    "description": "在地图上框选范围或指定行政区，规划并下载多期 Landsat 卫星影像，生成对比图与技术报告。"
+  },
+  "tool": {
+    "description": "规划、下载并渲染历史卫星影像（Landsat Collection 2 Level 2，1984 年后）。"
+  }
+}

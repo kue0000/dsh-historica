@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>historica 范围框选</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css">
+<style>
+  html,body{height:100%;margin:0;font-family:"Microsoft YaHei",system-ui,sans-serif}
+  #map{height:calc(100% - 118px)}
+  #bar{padding:10px 14px;background:#171717;color:#f5f2ea;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  #bar button{background:#f5f2ea;border:0;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:13px}
+  #out{width:100%;height:70px;font-family:Consolas,monospace;font-size:12px}
+  .hint{font-size:12px;color:#c9c2b3}
+</style>
+</head>
+<body>
+<div id="bar">
+  <strong>historica 框选</strong>
+  <span class="hint">用 □ 画矩形或用 ⬠ 画多边形；导出后把文本贴到 --bbox / --wkt</span>
+  <button onclick="exportBox()">导出 bbox</button>
+  <button onclick="exportGeo()">导出 GeoJSON</button>
+  <button onclick="exportWkt()">导出 WKT</button>
+  <button onclick="clearAll()">清空</button>
+</div>
+<textarea id="out" placeholder="导出结果出现在这里"></textarea>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+<script>
+const map = L.map('map').setView([30.5, 110.0], 5);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18, attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+const drawn = new L.FeatureGroup();
+map.addLayer(drawn);
+new L.Control.Draw({
+  edit:{featureGroup:drawn}, draw:{polyline:false,circle:false,circlemarker:false,marker:false,
+    polygon:{shapeOptions:{color:'#d81e26'}}, rectangle:{shapeOptions:{color:'#d81e26'}}}
+}).addTo(map);
+map.on(L.Draw.Event.CREATED, e => drawn.addLayer(e.layer));
+
+function firstLayer(){
+  const ls = drawn.getLayers();
+  if(!ls.length){ alert('请先画一个矩形或多边形'); return null; }
+  return ls[ls.length-1];
+}
+function exportBox(){
+  const l = firstLayer(); if(!l) return;
+  const b = l.getBounds();
+  out.value = [b.getWest(),b.getSouth(),b.getEast(),b.getNorth()].map(v=>v.toFixed(6)).join(',');
+}
+function geoJson(){
+  const l = firstLayer(); if(!l) return null;
+  return l.toGeoJSON();
+}
+function exportGeo(){
+  const g = geoJson(); if(!g) return;
+  out.value = JSON.stringify(g, null, 2);
+}
+function exportWkt(){
+  const g = geoJson(); if(!g) return;
+  const c = g.geometry.coordinates[0] || [];
+  out.value = 'POLYGON((' + c.map(p=>p[0].toFixed(6)+' '+p[1].toFixed(6)).join(',') + '))';
+}
+function clearAll(){ drawn.clearLayers(); out.value=''; }
+</script>
+</body>
+</html>

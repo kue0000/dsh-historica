@@ -1,0 +1,9 @@
+node_modules/
+runs/
+runtime/historica/cache/
+runtime/historica/**/__pycache__/
+**/__pycache__/
+*.pyc
+.venv/
+*.tgz
+.plugin-market-cache/

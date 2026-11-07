@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "title": "Historical imagery",
+    "description": "Pick a bbox on a map or name an administrative area, then plan and download multi-period Landsat imagery with comparison figures and a technical report."
+  },
+  "tool": {
+    "description": "Plan, download and render historical satellite imagery (Landsat Collection 2 Level 2, 1984+)."
+  }
+}

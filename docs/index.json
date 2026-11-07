@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "title": {
+    "en": "dsh-historica market",
+    "zh": "历史影像插件索引"
+  },
+  "description": {
+    "en": "Index for dsh-historica: historical Landsat imagery selection, download, comparison figures and technical reports inside DeepSeek Harness.",
+    "zh": "dsh-historica 的插件索引：在 DeepSeek Harness 内完成历史 Landsat 影像选景、下载、多期对比图与技术报告。"
+  },
+  "metadata": {
+    "categories": {
+      "tools": {
+        "title": {
+          "en": "Tools & data",
+          "zh": "工具与数据"
+        }
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "dsh-historica",
+      "title": {
+        "en": "Historical imagery",
+        "zh": "历史影像"
+      },
+      "description": {
+        "en": "Map bbox or administrative-area selection, multi-period Landsat download, tone-matched comparison figures and a technical report.",
+        "zh": "地图框选或指定行政区，规划并下载多期 Landsat 影像，生成色调统一的对比图与技术报告。"
+      },
+      "icon": "icons/historica.svg",
+      "author": "Fagu Yu",
+      "homepage": "https://github.com/kue0000/dsh-historica#readme",
+      "repository": {
+        "url": "https://github.com/kue0000/dsh-historica"
+      },
+      "metadata": {
+        "category": "tools",
+        "keywords": [
+          "dsh-plugin",
+          "landsat",
+          "satellite-imagery",
+          "historical-imagery",
+          "remote-sensing",
+          "gis"
+        ]
+      },
+      "versions": [
+        {
+          "version": "1.1.0",
+          "publishTimestamp": 1794025644,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": ">=0.2.0-rc.1 <0.3.0-0"
+          }
+        }
+      ]
+    }
+  ]
+}

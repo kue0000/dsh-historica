@@ -1,0 +1,13 @@
+{
+  "name": "珠三角核心（广深莞）100×90 km",
+  "defaults": {
+    "bbox": "113.55,22.45,114.55,23.26",
+    "year": "1993,2003,2012,2024",
+    "out": "runs/prd_core"
+  },
+  "decisions": {
+    "extent": "广深莞核心，约 102×90 km，面积约 9,206 km²",
+    "max_scenes_per_epoch": 4,
+    "note": "全量 2.0°×1.7° 只用 prd_full 出 estimate，不出图。"
+  }
+}
